@@ -1,0 +1,59 @@
+@import './config';
+
+html { /* stylelint-disable-line */
+    box-sizing: border-box;
+  }
+
+  *, *:before, *:after { /* stylelint-disable-line */
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+  }
+
+  html { /* stylelint-disable-line */
+    font-family: 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-left: $gutter;
+    margin-right: $gutter;
+  
+    @media (min-width: $max-width) {
+      margin: 0;
+    }
+  }
+
+  body { /* stylelint-disable-line */
+    background-color: #ffffec;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  
+  main { /* stylelint-disable-line */
+    margin: 0 auto;
+    max-width: $max-width;
+  }
+
+  h1 {
+    font-size: 3em;
+    font-weight: 700;
+    text-align: center;
+    word-wrap: break-word;
+}
+h2 {
+  font-size: 2em;
+  margin-bottom: 0.75em;
+}
+
+h3 {
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+  
+footer { /* stylelint-disable-line */
+    margin-bottom: 1em;
+    text-align: center;
+}
+  
+@import './header';
+@import 'form';
