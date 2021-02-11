@@ -1,0 +1,35 @@
+<%- include('header') -%>
+
+<h1>Undirskriftalisti</h1>
+
+<form method="post" action="/">
+  <div class="field<%= locals.isInvalid('name', errors) ?  ' field--invalid' : '' %>">
+    <label for="name">Nafn*</label>
+    <input type="text" name="name" id="name" value="<%= name %>" class="">
+  </div>
+  <div class="field<%= locals.isInvalid('id', errors) ?  ' field--invalid' : '' %>">
+    <label for="id">Kennitala*</label>
+    <input type="text" name="id" id="id" value="<%= id %>" class="">
+  </div>
+  <div class="field<%= locals.isInvalid('text', errors) ?  ' field--invalid' : '' %>">
+    <label for="text">Athugasemd:</label>
+    <textarea name="text" id="text"><%= text %></textarea>
+  </div>
+  <br></br>
+  <div class="field field--radio<%= locals.isInvalid('namelist', errors) ?  ' field--invalid' : '' %>">
+    <label><input type="radio" name="job" value="Ekki birta nafn á lista" <%= job === 'Ekki birta nafn á lista' ? 'checked' : '' %>> Ekki birta nafn á lista</label>
+  </div>
+ 
+  <% if (errors.length > 0) { %>
+    <h2>Villur við undirskrift:</h2>
+    <ul class="errors">
+      <% errors.forEach((error) => { %>
+        <li class="error"><label for="<%= error.param %>"><%= error.msg %></label></li>
+      <% }); %>
+    </ul>
+  <% } %>
+
+  <button>Skrifa Undir</button>
+</form>
+
+<%- include('footer') -%>
