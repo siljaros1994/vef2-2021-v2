@@ -2,9 +2,12 @@
   "name": "vef2-2021-v2",
   "version": "1.0.0",
   "description": "[Kynning í fyrirlestri](https://www.youtube.com/watch?v=1kRJBE040oY).",
-  "main": ".eslintrc.js",
+  "main": "./src/app.js",
+  "engines": {
+    "node": ">= 14"
+  },
   "scripts": {
-
+    "start": "concurrently npm:sass:build npm:run-server",
     "lint": "concurrently npm:lint:*",
     "lint:eslint": "eslint ./src",
     "lint:stylelint": "stylelint ./styles/*.scss --syntax scss",
@@ -15,31 +18,13 @@
     "nodemon": "nodemon ./src/app.js",
     "dev": "concurrently npm:nodemon npm:sass:*",
     "run-server": "node ./src/app.js",
-    "start": "concurrently npm:sass:build npm:run-server",
     "sass": "node-sass --source-map-embed ./src/scss/styles.scss ./public/css/styles.css",
     "setup": "node ./src/setup.js",
-    "demon": "nodemon ./src/app.js",
+    "demon": "nodemon ./src/app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/siljaros1994/vef2-2021-v2.git"
-  },
-  "author": "",
+  "author": "Silja",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/siljaros1994/vef2-2021-v2/issues"
-  },
-  "homepage": "https://github.com/siljaros1994/vef2-2021-v2#readme",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "express-validator": "^6.9.2",
-    "jest": "^26.6.3",
-    "pg": "^8.5.1",
-    "sass": "^1.32.6"
-  },
-  "devdependencies": {
+  "devDependencies": {
     "app": "^0.1.0",
     "concurrently": "^5.3.0",
     "eslint": "^7.19.0",
@@ -49,7 +34,18 @@
     "nodemon": "^2.0.7",
     "stylelint": "^13.9.0",
     "stylelint-config-primer": "^9.3.3",
-    "stylelint-config-standard": "^20.0.0",
-    "stylelint-config-sass-guidelines": "^7.1.0"
+    "stylelint-config-sass-guidelines": "^7.1.0",
+    "stylelint-config-standard": "^20.0.0"
+  },
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.2",
+    "jest": "^26.6.3",
+    "pg": "^8.5.1",
+    "sass": "^1.32.6",
+    "xss": "^1.0.8"
   }
 }
