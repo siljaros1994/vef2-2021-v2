@@ -1,0 +1,27 @@
+<%- include('header') -%>
+
+<h1>Undirskriftir</h1>
+
+<div class="signatures">
+  <% if (list.length === 0) { %>
+    <p>Engar undirskriftir.</p>
+  <% } %>
+
+<table class="signatures-table">
+    <tr class="signatures-row">
+      <th class="signatures-headline">Dags</th>
+      <th class="signatures-headline">Nafn</th>
+      <th class="signatures-headline">Athugasemd</th>
+    </tr>
+    <% list.forEach((signature) => { %>
+    <tr class="signatures-row">
+      <td class="signatures-col"><%= formatDate(signature.signed) %></td>
+      <td class="signatures-col"><%= formatName(signature) %></td>
+      <td class="signatures-col"><%= signature.comment %></td>
+    </tr>
+    <% }); %>
+  </table>
+  <% } %>
+</div>
+
+<%- include('footer') -%>
