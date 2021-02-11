@@ -1,0 +1,74 @@
+.signatures {
+  &-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+  &-col {
+    border: 1px solid #c9ca9b;
+    text-align: left;
+    padding: 5px;
+  }
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-size: 30px;
+  background-color: #fff;
+  border: 1px solid #c9ca9b;
+  border-radius: 5px;
+  border-color: transparent;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  transition: background-color 300ms ease-in;
+}
+
+&sign-button:hover {
+    background-color: #c9ca9b;
+}
+
+.field {
+  display: flex;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+} 
+
+.label {
+  margin-top: 5px;
+  width: 100px;
+}
+
+.headline {
+  font-weight: 700;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.errors {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+  margin: 1em 0;
+}
+  
+.error {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  list-style-type: none;
+  margin-bottom: 20px;
+  width: 50%;
+}
