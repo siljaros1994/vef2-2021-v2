@@ -4,7 +4,21 @@
   "description": "[Kynning í fyrirlestri](https://www.youtube.com/watch?v=1kRJBE040oY).",
   "main": ".eslintrc.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+
+    "lint": "concurrently npm:lint:*",
+    "lint:eslint": "eslint ./src",
+    "lint:stylelint": "stylelint ./styles/*.scss --syntax scss",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "//": "Keyrum sass:build alltaf að neðan áður en við byrjum svo það sé örugglega til css skrá",
+    "sass:build": "node-sass --source-map-embed ./styles/styles.scss ./public/styles.css",
+    "sass:watch": "node-sass --source-map-embed --watch ./styles/styles.scss ./public/styles.css",
+    "nodemon": "nodemon ./src/app.js",
+    "dev": "concurrently npm:nodemon npm:sass:*",
+    "run-server": "node ./src/app.js",
+    "start": "concurrently npm:sass:build npm:run-server",
+    "sass": "node-sass --source-map-embed ./src/scss/styles.scss ./public/css/styles.css",
+    "setup": "node ./src/setup.js",
+    "demon": "nodemon ./src/app.js",
   },
   "repository": {
     "type": "git",
@@ -17,23 +31,25 @@
   },
   "homepage": "https://github.com/siljaros1994/vef2-2021-v2#readme",
   "dependencies": {
-    "@primer/css": "^15.2.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.2",
+    "jest": "^26.6.3",
+    "pg": "^8.5.1",
+    "sass": "^1.32.6"
+  },
+  "devdependencies": {
     "app": "^0.1.0",
     "concurrently": "^5.3.0",
-    "ejs": "^3.1.6",
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "express": "^4.17.1",
-    "express-validator": "^6.9.2",
     "node-sass": "^5.0.0",
     "nodemon": "^2.0.7",
-    "pg": "^8.5.1",
+    "stylelint": "^13.9.0",
     "stylelint-config-primer": "^9.3.3",
-    "stylelint-config-sass-guidelines": "^7.1.0",
-    "stylelint-config-standard": "^20.0.0"
-  },
-  "devDependencies": {
-    "stylelint": "^10.1.0"
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-sass-guidelines": "^7.1.0"
   }
 }
