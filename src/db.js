@@ -30,7 +30,6 @@ async function query(q, values = []) {
 
   try {
     const result = await client.query(q, values);
-
     return result;
   } catch (err) {
     throw err;
