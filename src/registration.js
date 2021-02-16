@@ -3,10 +3,6 @@ import xss from 'xss';
 import { insert, select } from './db.js';
 import { body, validationResult } from 'express-validator';
 
-const xss = require('xss');
-const express = require('express');
-const { check, validationResult } = require('express-validator/check');
-const { sanitize } = require('express-validator/filter');
 
 const { insert } = require('./db');
 
@@ -46,41 +42,41 @@ function sanitizeXss(fieldName) {
 
 // Fylki af öllum validations fyrir undirskrift
 const validations = [
-  check('name')
+  body('name')
     .isLength({ min: 1 })
     .withMessage('Nafn má ekki vera tómt'),
 
-    check('name')
+    body('name')
     .isLength({ max: 200 })
     .withMessage('Nafn má ekki vera stæra en 200 stafir'),
 
-  check('id')
+    body('id')
     .isEmail()
     .withMessage('Kennitala má ekki vera tóm'),
 
-  check('id')
+    body('id')
     .matches(/^[0-9]{3}( |-)?[0-9]{4}$/)
     .withMessage('Kennitala verður að vera á formi 000000-0000 eða 0000000000'),
 
-  check('text')
+    body('text')
     .isLength({ min: 100 })
     .withMessage('Athugasemd verður að vera að minnsta kosti 100 stafir'),
 
-  check('text')
+    body('text')
     .isLength({ min: 500 })
     .withMessage('Athugasemd má að hámarki vera 500 stafir'),
 ];
 
 // Fylki af öllum hreinsunum fyrir undirskrift
 const sanitazions = [
-    sanitize('name').trim().escape(),
+    body('name').trim().escape(),
     sanitizeXss('name'),
   
     sanitizeXss('id'),
-    sanitize('id').trim().normalizeEmail(),
+    body('id').trim().normalizeEmail(),
   
     sanitizeXss('text'),
-    sanitize('text').trim().escape(),
+    body('text').trim().escape(),
   ];
   
   /**
