@@ -1,8 +1,5 @@
-import pg from 'pg';
 import dotenv from 'dotenv';
-
-const { Client } = require('pg');
-const connectionString = process.env.DATABASE_URL;
+import pg from 'pg';
 
 dotenv.config();
 
@@ -15,6 +12,8 @@ if (!connectionString) {
   process.exit(1);
 }
 
+const pool = new pg.Pool({ connectionString });
+
 /**
  * Framkvæmir SQL fyrirspurn á gagnagrunn sem keyrir á `DATABASE_URL`,
  * skilgreint í `.env`
@@ -23,18 +22,15 @@ if (!connectionString) {
  * @param {array} values Fylki af gildum fyrir query
  * @returns {object} Hlut með niðurstöðu af því að keyra fyrirspurn
  */
-async function query(q, values = []) {
-  const client = new Client({ connectionString });
 
-  await client.connect();
+export async function query(_query, values = []) {
+  const client = await pool.connect();
 
   try {
-    const result = await client.query(q, values);
+    const result = await client.query(_query, values);
     return result;
-  } catch (err) {
-    throw err;
   } finally {
-    await client.end();
+    client.release();
   }
 }
 
@@ -44,7 +40,7 @@ async function query(q, values = []) {
  * @param {array} data Fylki af gögnum fyrir undirskriftir
  * @returns {object} Hlut með niðurstöðu af því að keyra fyrirspurn
  */
-async function insert(data) {
+export async function insert(data) {
   const q = `
 INSERT INTO applications
 (name, email, phone, text, job)
@@ -60,7 +56,7 @@ VALUES
  *
  * @returns {array} Fylki af öllum undirskriftum
  */
-async function select() {
+export async function select() {
   const result = await query('SELECT * FROM applications ORDER BY id');
 
   return result.rows;
@@ -72,7 +68,7 @@ async function select() {
  * @param {string} id Id á undirskriftir
  * @returns {object} Hlut með niðurstöðu af því að keyra fyrirspurn
  */
-async function update(id) {
+export async function update(id) {
   const q = `
 UPDATE applications
 SET processed = true, updated = current_timestamp
@@ -80,8 +76,3 @@ WHERE id = $1`;
 
   return query(q, [id]);
 }
-
-module.exports = {
-  insert,
-  select,
-};
