@@ -47,5 +47,14 @@
     "pg": "^8.5.1",
     "sass": "^1.32.6",
     "xss": "^1.0.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siljaros1994/vef2-2021-v2.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/siljaros1994/vef2-2021-v2/issues"
+  },
+  "homepage": "https://github.com/siljaros1994/vef2-2021-v2#readme"
 }
