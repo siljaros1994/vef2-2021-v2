@@ -4,6 +4,9 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { router as registration } from './registration.js';
 
+const {
+  PORT: port = 3000,
+} = process.env;
 dotenv.config();
 
 const app = express();
@@ -33,7 +36,7 @@ app.listen(port, () => {
  */
 
 function isInvalid(field, errors) {
-  return Boolean(errors.find(i => i.param === field));
+  return Boolean(errors.find((i) => i.param === field));
 }
 
 /**
@@ -45,13 +48,11 @@ function isInvalid(field, errors) {
 function formatDate(sigDate) {
   return ((sigDate.toISOString().substring(0, 10)).split('-')).reverse()
     .join('.');
-} 
+}
 
 app.locals.isInvalid = isInvalid;
 app.locals.formatDate = formatDate;
-app.locals.formatName = formatName;
 
-app.use('/', apply);
 app.use('/registration', registration);
 
 /**
@@ -77,10 +78,6 @@ function errorHandler(error, req, res, next) { // eslint-disable-line
 
 app.use(notFoundHandler);
 app.use(errorHandler);
-
-const {
-  PORT: port = 3000,
-} = process.env;
 
 app.listen(port, () => {
   console.info(`Server running at http://localhost:${port}/`);
