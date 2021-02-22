@@ -42,11 +42,11 @@ export async function query(_query, values = []) {
  */
 export async function insert(data) {
   const q = `
-INSERT INTO applications
-(name, email, phone, text, job)
+INSERT INTO signatures
+(name, nationId, comment, anonymous)
 VALUES
-($1, $2, $3, $4, $5)`;
-  const values = [data.name, data.email, data.phone, data.text, data.job];
+($1, $2, $3, $4)`;
+  const values = [data.name, data.nationalId, data.comment, data.anonymous];
 
   return query(q, values);
 }
