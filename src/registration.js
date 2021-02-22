@@ -84,11 +84,13 @@ const sanitazions = [
  * @returns {string} Formi fyrir umsókn
  */
 function form(req, res) {
+  console.log('hi')
   const data = {
     title: 'Undirskriftarlisti',
     name: '',
     id: '',
     text: '',
+    job: false,
     errors: [],
   };
   res.render('form', data);
@@ -117,6 +119,7 @@ function showErrors(req, res, next) {
     name,
     id,
     text,
+    job: false,
   };
 
   const validation = validationResult(req);
