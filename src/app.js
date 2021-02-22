@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import { router as registration } from './registration.js';
 
 const {
-  PORT: port = 3000,
+  PORT: port = 3001,
 } = process.env;
 dotenv.config();
 
@@ -23,9 +23,9 @@ app.use(express.static(join(path, '../public')));
 // TODO setja upp rest af virkni!
 
 // Verðum að setja bara *port* svo virki á heroku
-app.listen(port, () => {
-  console.info(`Server running at http://localhost:${port}/`);
-});
+//app.listen(port, () => {
+//  console.info(`Server running at http://localhost:${port}/`);
+//});
 
 /**
  * Hjálparfall til að athuga hvort reitur sé gildur eða ekki.
@@ -53,7 +53,7 @@ function formatDate(sigDate) {
 app.locals.isInvalid = isInvalid;
 app.locals.formatDate = formatDate;
 
-app.use('/registration', registration);
+app.use('/', registration);
 
 /**
  * @param {object} req Request hlutur
